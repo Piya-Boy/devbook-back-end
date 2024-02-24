@@ -2,6 +2,8 @@ const db = require("../config/connect.js");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const joi = require("joi");
+const cookie = require('cookie');
+
 const createError = require("../utils/createError");
 
 const register = async (req, res, next) => {
