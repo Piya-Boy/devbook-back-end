@@ -2,7 +2,7 @@ const db = require("../config/connect.js");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const joi = require("joi");
-// const cookie = require('cookie');
+const cookie = require('cookie');
 
 const createError = require("../utils/createError");
 
@@ -97,17 +97,16 @@ const login = async (req, res, next) => {
 
         }
 
-        const token = jwt.sign({ id: user[0].id }, process.env.SECRET_KEY);
+        const token = jwt.sign({ id: user.id }, process.env.SECRET_KEY);
 
         // Check if 'user' has 'password' property before destructuring
-        const { password, ...others } = user[0] || {};
+        const { password, ...others } = user || {};
 
-        res
-            .cookie("accessToken", token, {
-                httpOnly: true,
-            })
-            .status(200)
-            .json(others);
+        res.cookie("accessToken", token, {
+            httpOnly: true
+        }).send();
+
+        return res.status(200).json(others);
 
     } catch (error) {
         return next(createError(500, error.message));
