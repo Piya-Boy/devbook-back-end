@@ -2,7 +2,6 @@ const db = require("../config/connect.js");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const joi = require("joi");
-const cookie = require('cookie');
 
 const createError = require("../utils/createError");
 
@@ -104,7 +103,7 @@ const login = async (req, res, next) => {
 
         res.cookie("accessToken", token, {
             httpOnly: true
-        }).send();
+        });
 
         return res.status(200).json(others);
 
