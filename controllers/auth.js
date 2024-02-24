@@ -106,6 +106,7 @@ const login = async (req, res, next) => {
             domain: "devbook-back-end-api.onrender.com",
             secure: true, // Add this if using HTTPS
             path: '/', // Set the path explicitly
+            sameSite: "none",
         });
 
         return res.status(200).json(others);
