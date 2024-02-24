@@ -102,7 +102,7 @@ const login = async (req, res, next) => {
         const { password, ...others } = user || {};
 
         res.cookie("accessToken", token, {
-            secure: true,
+
             httpOnly: true,
             domain: "devbook-back-end-api.onrender.com",
         });
