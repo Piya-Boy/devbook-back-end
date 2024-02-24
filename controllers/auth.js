@@ -103,7 +103,8 @@ const login = async (req, res, next) => {
 
         res.cookie("accessToken", token, {
             secure: true,      
-            httpOnly: true
+            httpOnly: true,
+            sameSite: 'Strict'
         });
 
         return res.status(200).json(others);
