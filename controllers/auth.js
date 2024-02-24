@@ -102,9 +102,10 @@ const login = async (req, res, next) => {
         const { password, ...others } = user || {};
 
         res.cookie("accessToken", token, {
-
             httpOnly: true,
             domain: "devbook-back-end-api.onrender.com",
+            secure: true, // Add this if using HTTPS
+            path: '/', // Set the path explicitly
         });
 
         return res.status(200).json(others);
