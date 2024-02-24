@@ -104,8 +104,7 @@ const login = async (req, res, next) => {
         res.cookie("accessToken", token, {
             secure: true,
             httpOnly: true,
-            expires: dayjs().add(30, "days").toDate(),
-            sameSite: 'Strict'
+            domain: "devbook-back-end-api.onrender.com",
         });
 
         return res.status(200).json(others);
