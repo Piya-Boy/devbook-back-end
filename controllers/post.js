@@ -99,7 +99,8 @@ const deletePost = async (req, res, next) => {
         const post = await db.posts.findFirst({ where: { id: parseInt(postId) } });
         // console.log(post);
         if (post && post.img) {
-            const filePath = path.join(__dirname, '../../client/public/', 'upload', post.img);
+            const filePath = path.join(__dirname, '../../upload', post.img);
+            console.log(filePath);
             try {
                 await fs.promises.unlink(filePath); // Asynchronous file deletion
                 // console.log(`File ${post.img} has been deleted successfully.`);

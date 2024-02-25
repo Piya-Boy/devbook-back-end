@@ -52,7 +52,8 @@ const updateUser = async (req, res, next) => {
         })
 
         if (userss.profilePic !== profilePic){
-            const filePath = `https://devbook-back-end-api.onrender.com/upload/${userss.profilePic}`;
+            const filePath = path.join(__dirname, `../../upload/${userss.profilePic}`);
+            console.log(filePath);
             try {
                 await fs.promises.unlink(filePath); // Asynchronous file deletion
             } catch (unlinkError) {
@@ -61,7 +62,8 @@ const updateUser = async (req, res, next) => {
         }
 
         if(userss.coverPic !== coverPic){
-            const filePath = `https://devbook-back-end-api.onrender.com/upload/${userss.coverPic}`;
+            const filePath = path.join(__dirname, `../../upload/${userss.coverPic}`);
+            console.log(filePath);
             try {
                 await fs.promises.unlink(filePath); // Asynchronous file deletion
             }catch (unlinkError) {
