@@ -13,6 +13,7 @@ const storyRoute = require('./routes/stories.js')
 const ralationshipRoute = require('./routes/relationships.js')
 const multer = require('multer');
 const path = require('path');
+const fs = require("fs");
 const app = express();
 
 app.use((req, res, next) => {
@@ -38,11 +39,25 @@ app.options("*", cors());
 app.use(cookieParser());
 
 
+// const storage = multer.diskStorage({
+//     destination: function (req, file, cb) {
+//         const uploadDir = path.join(__dirname, '../upload');
+//         console.log(uploadDir);
+//         cb(null, uploadDir);
+//     },
+//     filename: function (req, file, cb) {
+//         cb(null, Date.now() + file.originalname);
+//     },
+// });
+
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         const uploadDir = path.join(__dirname, '../upload');
-        console.log(uploadDir);
-        cb(null, uploadDir);
+        // Create the directory if it doesn't exist
+        fs.mkdir(uploadDir, { recursive: true }, (err) => {
+            if (err) return cb(err);
+            cb(null, uploadDir);
+        });
     },
     filename: function (req, file, cb) {
         cb(null, Date.now() + file.originalname);
